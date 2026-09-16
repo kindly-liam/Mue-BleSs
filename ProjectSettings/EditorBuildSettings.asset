@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Game attack system.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Main menu.unity
+    guid: 4f5b7179893548b43b475932be94d3a5
+  - enabled: 1
+    path: Assets/Scenes/Enemy.unity
+    guid: ee61179fb72fbc2419b17ded91013842
+  - enabled: 1
+    path: Assets/Scenes/Player.unity
+    guid: 80cf434605c77074a8e0bd67f88df83b
+  - enabled: 1
+    path: Assets/Scenes/Level Map Blocking.unity
+    guid: 06855f7a02037dd4fb75998518d6ebe2
+  - enabled: 1
+    path: Assets/Scenes/AllScenesLoader.unity
+    guid: 90ffa091761c5d84b9a7a2c1e3f6767c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
