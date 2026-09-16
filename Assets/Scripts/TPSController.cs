@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using StarterAssets;
 public class TPSController : MonoBehaviour
 {
 
@@ -11,35 +11,59 @@ public class TPSController : MonoBehaviour
     [SerializeField] private float aimSensitivity;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform debugTransform;
+    [SerializeField] private Camera aimVirtualCamera;
 
-    private TPSController tPSController;
+    ThirdPersonController thirdPersonController;
+    private StarterAssetsInputs starterAssetsInputs;
+    
 
     private void Awake()
     {
-        tPSController = GetComponent<TPSController>();
+        
+        starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        thirdPersonController = GetComponent<ThirdPersonController>();
     }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 mouseWorldPosition = Vector3.zero;
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray= Camera.main.ScreenPointToRay(screenCenterPoint);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
-          debugTransform.position = raycastHit.point;
+            debugTransform.position = raycastHit.point;
+            mouseWorldPosition = raycastHit.point;
         }
 
-       // if (Mouse.current.leftButton.isPressed)
-        //{
-         //  Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
-        //}
-      
-    }
+        if (starterAssetsInputs.aim)
+        {
+            aimVirtualCamera.gameObject.SetActive(true);
+            starterAssetsInputs.cursorInputForLook = false;
+             thirdPersonController.SetSensitivity(aimSensitivity);
+             thirdPersonController.SetRotateOnMove(false);
+
+            Vector3 worldAimTarget = mouseWorldPosition;
+            worldAimTarget.y = transform.position.y;
+            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+
+            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+        }
+        else
+        {
+            aimVirtualCamera.gameObject.SetActive(false);
+            starterAssetsInputs.cursorInputForLook = true;
+            thirdPersonController.SetSensitivity(normalSensitivity);
+            thirdPersonController.SetRotateOnMove(true);
+
+        }
+    } 
 }
