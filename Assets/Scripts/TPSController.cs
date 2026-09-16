@@ -1,5 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;   
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,6 +35,11 @@ public class TPSController : MonoBehaviour
         {
           debugTransform.position = raycastHit.point;
         }
+
+       // if (Mouse.current.leftButton.isPressed)
+        //{
+         //  Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
+        //}
       
     }
 }
