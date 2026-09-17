@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public GameObject Play;
     public GameObject Summary;
