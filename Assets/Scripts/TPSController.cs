@@ -49,7 +49,7 @@ public class TPSController : MonoBehaviour
         if (starterAssetsInputs.aim)
         {
             aimVirtualCamera.gameObject.SetActive(true);
-            //starterAssetsInputs.cursorInputForLook = false;
+            starterAssetsInputs.cursorInputForLook = false;
              thirdPersonController.SetSensitivity(aimSensitivity);
              thirdPersonController.SetRotateOnMove(false);
 
