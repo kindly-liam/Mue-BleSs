@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
     public GameObject Play;
     public GameObject Summary;
@@ -38,6 +38,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(""); // amigo tipo por favor pongan aca la escena del juego tipo si porfa gracias atte liam el abrazador
+        SceneManager.LoadScene("BUILD FINAL"); 
     }
 }
