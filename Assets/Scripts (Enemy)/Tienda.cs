@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class TiendaHealth : MonoBehaviour
 {
     [SerializeField] private int health;
     private void OnCollisionEnter(Collision collision)
