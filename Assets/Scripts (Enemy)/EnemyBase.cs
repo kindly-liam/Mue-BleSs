@@ -16,11 +16,21 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         agente = GetComponent<NavMeshAgent>();
+
+        GameObject tienda = GameObject.FindGameObjectWithTag("Tienda");
+
+        if (tienda != null)
+        {
+            objetivo = tienda.transform;
+        }
     }
 
     void Update()
     {
-            agente.SetDestination(objetivo.position);
+        if (objetivo != null)
+        {
+            agente.destination = objetivo.position;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

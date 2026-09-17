@@ -16,16 +16,9 @@ public class BulletProjectile : MonoBehaviour
         bulletRigidbody.linearVelocity = transform.forward * speed;
     }
 
-    private void OnTriggerEnter(Collider other)
+   
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.GetComponent<BulletTarget1>() != null)
-        {
-            //hit target
-        }
-        else
-        {
-            //hit something else
-        }
         Destroy(gameObject);
     }
 }
