@@ -412,6 +412,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1128736880961053132, guid: c5bf0aad1a487474ba0d7258a876dad6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
     - target: {fileID: 4381518728986831798, guid: c5bf0aad1a487474ba0d7258a876dad6, type: 3}
       propertyPath: m_Name
       value: TiendaConSpawn
