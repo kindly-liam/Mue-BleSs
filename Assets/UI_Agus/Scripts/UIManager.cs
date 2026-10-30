@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
     private void UpdateUI()
     {
         if (shopHealthSlider) shopHealthSlider.value = currentShopHealth / maxShopHealth;
-        if (goldText) goldText.text = $"puntos: {currentPoints}";
-        if (waveText) waveText.text = "Oleada: 1/3";
+        if (goldText) goldText.text = $"Gold: {currentPoints}";
+        if (waveText) waveText.text = "Wave: 1/3";
     }
 }
