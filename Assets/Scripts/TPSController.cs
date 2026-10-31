@@ -45,7 +45,11 @@ public class TPSController : MonoBehaviour
             // debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
         }
+        Vector3 worldAimTarget = mouseWorldPosition;
+        worldAimTarget.y = transform.position.y;
+        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
 
+        transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
         if (starterAssetsInputs.aim)
         {
             aimVirtualCamera.gameObject.SetActive(true);
@@ -53,11 +57,11 @@ public class TPSController : MonoBehaviour
              thirdPersonController.SetSensitivity(aimSensitivity);
              thirdPersonController.SetRotateOnMove(false);
 
-            Vector3 worldAimTarget = mouseWorldPosition;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-
-            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+           // Vector3 worldAimTarget = mouseWorldPosition;
+           // worldAimTarget.y = transform.position.y;
+           // Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+           
+            //transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
         }
         else
         {
