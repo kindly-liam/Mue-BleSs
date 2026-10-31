@@ -24,6 +24,6 @@ public class WaveTextObserver : MonoBehaviour
     private void UpdateWaveText(int currentWave, int maxWaves)
     {
         
-        waveText.text = $"Oleada: {currentWave} / {maxWaves}";
+        waveText.text = $"Wave: {currentWave} / {maxWaves}";
     }
 }

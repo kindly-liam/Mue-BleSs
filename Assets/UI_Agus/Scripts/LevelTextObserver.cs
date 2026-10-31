@@ -24,6 +24,6 @@ public class LevelTextObserver : MonoBehaviour
     private void UpdateLevelText(int currentLevel)
     {
         
-        levelText.text = $"Nivel {currentLevel}";
+        levelText.text = $"Level {currentLevel}";
     }
 }
