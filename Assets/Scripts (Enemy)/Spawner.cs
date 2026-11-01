@@ -1,14 +1,13 @@
-using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> SpawnPoints = new List<GameObject>();
-    [SerializeField] private GameObject Enemy;
+    [SerializeField] private List<GameObject> Enemigos = new List<GameObject>();
 
-    [SerializeField] private int maxEnemigos = 3;   // nuevo: tope de enemigos
-    private int enemigosSpawneados = 0;             // nuevo: contador
+    [SerializeField] private int maxEnemigos = 6;
+    private int enemigosSpawneados = 0;
 
     void Start()
     {
@@ -17,14 +16,16 @@ public class Spawner : MonoBehaviour
 
     void SpawnNewEnemy()
     {
-        if (enemigosSpawneados >= maxEnemigos)   // nuevo: si ya llegó al tope
+        if (enemigosSpawneados >= maxEnemigos)
         {
-            CancelInvoke("SpawnNewEnemy");       // detiene el spawn
+            CancelInvoke("SpawnNewEnemy");
             return;
         }
 
-        int random = Random.Range(0, SpawnPoints.Count);
-        Instantiate(Enemy, SpawnPoints[random].transform.position, transform.rotation);
-        enemigosSpawneados++;                    // nuevo: suma al contador
+        int puntoRandom = Random.Range(0, SpawnPoints.Count);
+        int enemigoRandom = Random.Range(0, Enemigos.Count);
+
+        Instantiate(Enemigos[enemigoRandom], SpawnPoints[puntoRandom].transform.position, transform.rotation);
+        enemigosSpawneados++;
     }
 }
