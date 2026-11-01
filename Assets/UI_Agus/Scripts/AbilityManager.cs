@@ -37,13 +37,13 @@ public class AbilityManager : MonoBehaviour
             UseAbility(AbilityType.Speed, speedCooldown, ref nextSpeedTime);
         }
 
-        // Habilidad Q: Aumento de Daño
+        
         if (Keyboard.current.qKey.wasPressedThisFrame && Time.time >= nextDamageTime)
         {
             UseAbility(AbilityType.Damage, damageCooldown, ref nextDamageTime);
         }
 
-        // Habilidad F: Velocidad de Disparo
+        
         if (Keyboard.current.fKey.wasPressedThisFrame && Time.time >= nextFireRateTime)
         {
             UseAbility(AbilityType.FireRate, fireRateCooldown, ref nextFireRateTime);
@@ -54,10 +54,10 @@ public class AbilityManager : MonoBehaviour
     {
         nextTimeVar = Time.time + cooldown;
 
-        // Notifica a los observadores de UI para iniciar la animación de Cooldown
+        
         OnAbilityUsed?.Invoke(ability, cooldown);
 
-        // AQUÍ tu compañero conectará la lógica real del Power-Up
+       
         Debug.Log($"Habilidad {ability} activada. Cooldown: {cooldown}s");
     }
 }

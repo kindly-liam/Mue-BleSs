@@ -15,12 +15,11 @@ public class ShopManager : MonoBehaviour
     [Header("Referencias UI")]
     [SerializeField] private GameObject shopPanel;
 
-    // Eventos para notificar a otros sistemas cuando se compra un arma
+    
     public static event Action OnFusilComprado;
     public static event Action OnSubfusilComprado;
 
-    // --- MÉTODOS PARA LOS BOTONES DE LA UI ---
-
+    
     public void ComprarTorreta()
     {
         if (torretaPrefab != null && spawnPointTorreta != null)
@@ -42,7 +41,7 @@ public class ShopManager : MonoBehaviour
         if (GoldManager.Instance != null && GoldManager.Instance.TrySpendGold(precioFusil))
         {
             Debug.Log($"Fusil comprado por {precioFusil} de oro.");
-            // Dispara el evento para que el sistema de armas lo escuche
+            
             OnFusilComprado?.Invoke();
         }
         else
@@ -56,12 +55,26 @@ public class ShopManager : MonoBehaviour
         if (GoldManager.Instance != null && GoldManager.Instance.TrySpendGold(precioSubfusil))
         {
             Debug.Log($"Subfusil comprado por {precioSubfusil} de oro.");
-            // Dispara el evento para que el sistema de armas lo escuche
+            
             OnSubfusilComprado?.Invoke();
         }
         else
         {
             Debug.Log("Oro insuficiente para el Subfusil.");
+        }
+    }
+    public void AbrirTienda()
+    {
+        if (shopPanel != null)
+        {
+            
+            shopPanel.SetActive(true);
+
+            
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            
         }
     }
 

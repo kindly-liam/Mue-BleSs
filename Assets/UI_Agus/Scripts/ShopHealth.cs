@@ -9,6 +9,7 @@ public class ShopHealth : MonoBehaviour
 
     
     public static event Action<float, float> OnHealthChanged;
+    public static event Action OnDefeat;
 
     void Start()
     {
@@ -18,8 +19,16 @@ public class ShopHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (currentHealth <= 0) return; 
+
         currentHealth -= damage;
-        if (currentHealth <= 0) currentHealth = 0;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            OnDefeat?.Invoke(); 
+        }
+
         NotifyHealthChange();
     }
 
@@ -56,14 +65,14 @@ public class ShopHealth : MonoBehaviour
         
         if (Keyboard.current.kKey.wasPressedThisFrame)
         {
-            TakeDamage(10f);
+            TakeDamage(50f);
             Debug.Log("Vida actual de la tienda: " + currentHealth);
         }
 
         
         if (Keyboard.current.lKey.wasPressedThisFrame)
         {
-            Heal(10f);
+            Heal(50f);
             Debug.Log("Vida actual de la tienda: " + currentHealth);
         }
 
