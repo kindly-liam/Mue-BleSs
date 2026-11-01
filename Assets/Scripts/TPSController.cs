@@ -4,6 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using StarterAssets;
+using Unity.Cinemachine;
+
+
 public class TPSController : MonoBehaviour
 {
 
@@ -13,7 +16,7 @@ public class TPSController : MonoBehaviour
    // [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private Transform spawnBulletPosition;
-    [SerializeField] private Camera aimVirtualCamera;
+    [SerializeField] private CinemachineCamera aimVirtualCamera;        
 
     ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
@@ -45,28 +48,26 @@ public class TPSController : MonoBehaviour
             // debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
         }
-        Vector3 worldAimTarget = mouseWorldPosition;
-        worldAimTarget.y = transform.position.y;
-        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
 
-        transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+        
+
         if (starterAssetsInputs.aim)
         {
             aimVirtualCamera.gameObject.SetActive(true);
-            starterAssetsInputs.cursorInputForLook = false;
+            //starterAssetsInputs.cursorInputForLook = false;
              thirdPersonController.SetSensitivity(aimSensitivity);
              thirdPersonController.SetRotateOnMove(false);
 
-           // Vector3 worldAimTarget = mouseWorldPosition;
-           // worldAimTarget.y = transform.position.y;
-           // Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+            Vector3 worldAimTarget = mouseWorldPosition;
+            worldAimTarget.y = transform.position.y;
+            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
            
-            //transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
         }
         else
         {
             aimVirtualCamera.gameObject.SetActive(false);
-            starterAssetsInputs.cursorInputForLook = true;
+            //starterAssetsInputs.cursorInputForLook = true;
             thirdPersonController.SetSensitivity(normalSensitivity);
             thirdPersonController.SetRotateOnMove(true);
 
@@ -77,8 +78,11 @@ public class TPSController : MonoBehaviour
             Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
            Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
             starterAssetsInputs.shoot = false;
+
         }
 
 
-    } 
+    }
+
+   
 }
