@@ -18,8 +18,9 @@ public class TPSController : MonoBehaviour
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private CinemachineCamera aimVirtualCamera;        
 
-    ThirdPersonController thirdPersonController;
+    private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
+    private Animator animator;
     
 
     private void Awake()
@@ -27,6 +28,8 @@ public class TPSController : MonoBehaviour
         
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
+        animator = GetComponent<Animator>();
+
     }
 
 
@@ -57,6 +60,7 @@ public class TPSController : MonoBehaviour
             //starterAssetsInputs.cursorInputForLook = false;
              thirdPersonController.SetSensitivity(aimSensitivity);
              thirdPersonController.SetRotateOnMove(false);
+            animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
 
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
@@ -70,7 +74,7 @@ public class TPSController : MonoBehaviour
             //starterAssetsInputs.cursorInputForLook = true;
             thirdPersonController.SetSensitivity(normalSensitivity);
             thirdPersonController.SetRotateOnMove(true);
-
+            animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
         }
 
         if (starterAssetsInputs.shoot)
