@@ -29,6 +29,7 @@ public class AbilityManager : MonoBehaviour
 
     private void Update()
     {
+        
         if (Keyboard.current == null) return;
 
         // Habilidad C: Aumento de Velocidad
