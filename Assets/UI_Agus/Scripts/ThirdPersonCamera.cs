@@ -5,7 +5,7 @@ public class ThirdPersonCamera : MonoBehaviour
 {
     [SerializeField] private Transform target; 
     [SerializeField] private float mouseSensitivity = 0.15f;
-    [SerializeField] private float distanceFromTarget = 5f;
+    [SerializeField] private float distanceFromTarget = 3f;
 
     private PlayerInputActions inputActions;
     private Vector2 lookInput;
