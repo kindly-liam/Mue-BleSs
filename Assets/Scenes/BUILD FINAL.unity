@@ -14112,6 +14112,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'Enemys.Array.data[1]'
+      value: 
+      objectReference: {fileID: 3429508502612888755, guid: 001dc4f18131deb4db710f06601e7697, type: 3}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: SpawnPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 691225157}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1889399471}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2106443796}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2106443796}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2106443796}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2106443796}
     - target: {fileID: 1020048698211442077, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26

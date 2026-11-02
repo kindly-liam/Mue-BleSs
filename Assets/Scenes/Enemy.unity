@@ -524,6 +524,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1316019505}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1084687811}
+    - target: {fileID: 228123167229371795, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+      propertyPath: 'SpawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1526393848}
     - target: {fileID: 1020048698211442077, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -588,8 +600,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5962434298688670263, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1020048698211442077, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
@@ -601,10 +612,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1020048698211442077, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1526393849}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7046081180657682121, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2082334935}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
 --- !u!1 &751804788
 GameObject:
@@ -1121,11 +1129,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 399e89a5072583f4a917578050787757, type: 3}
---- !u!1 &2058362800 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7046081180657682121, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
-  m_PrefabInstance: {fileID: 266347898}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2076113138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,27 +1261,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1020048698211442077, guid: aae635cc990fa2944b1dc724f3e7c2db, type: 3}
   m_PrefabInstance: {fileID: 266347898}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2082334935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058362800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b4c6fb94b3b184382ed496a1c08b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SistemadeOleadas
-  SpawnedEnemies: 0
-  SpawnPoints:
-  - {fileID: 1316019505}
-  - {fileID: 1084687811}
-  - {fileID: 1526393848}
-  Enemy: {fileID: 3429508502612888755, guid: 001dc4f18131deb4db710f06601e7697, type: 3}
-  CurrentRound: 1
-  RemainingEnemies: 0
-  EnemiesPerRound: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
