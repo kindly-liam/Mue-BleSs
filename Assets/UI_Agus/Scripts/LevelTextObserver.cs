@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro; 
+using TMPro;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class LevelTextObserver : MonoBehaviour
@@ -13,6 +13,7 @@ public class LevelTextObserver : MonoBehaviour
 
     private void OnEnable()
     {
+        
         WaveManager.OnLevelChanged += UpdateLevelText;
     }
 
@@ -23,7 +24,9 @@ public class LevelTextObserver : MonoBehaviour
 
     private void UpdateLevelText(int currentLevel)
     {
-        
-        levelText.text = $"Level {currentLevel}";
+        if (levelText != null)
+        {
+            levelText.text = $"Level {currentLevel}";
+        }
     }
 }

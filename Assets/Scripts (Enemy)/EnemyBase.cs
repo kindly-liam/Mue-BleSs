@@ -3,14 +3,16 @@ using UnityEngine.AI;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] private Transform objetivo; 
+    [SerializeField] private Transform objetivo;
     [SerializeField] private int damage = 1;
     [SerializeField] private int health = 5;
+    [SerializeField] private int recompensaOro = 25;
 
-    public int Damage
-    {
-        get { return damage; }
-    }
+    [Header("Configuración de Ataque")]
+    [SerializeField] private float cadenciaAtaque = 1f; 
+    private float tiempoSiguienteAtaque = 0f;
+
+    public int Damage => damage;
 
     private NavMeshAgent agente;
 
@@ -18,7 +20,6 @@ public class EnemyBase : MonoBehaviour
     {
         agente = GetComponent<NavMeshAgent>();
 
-        
         if (objetivo == null)
         {
             GameObject tienda = GameObject.FindGameObjectWithTag("Tienda");
@@ -31,26 +32,28 @@ public class EnemyBase : MonoBehaviour
 
     void Update()
     {
-        
         if (objetivo == null || agente == null) return;
 
-        
         if (agente.isActiveAndEnabled && agente.isOnNavMesh)
         {
             agente.destination = objetivo.position;
         }
     }
 
-    
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        ProcesarDanio(collision.gameObject);
+        
+        ProcesarAtaqueContinuo(other.gameObject);
     }
 
-    
     private void OnTriggerEnter(Collider other)
     {
         ProcesarDanio(other.gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ProcesarDanio(collision.gameObject);
     }
 
     private void ProcesarDanio(GameObject objetoColisionado)
@@ -58,14 +61,35 @@ public class EnemyBase : MonoBehaviour
         if (objetoColisionado.CompareTag("Bullet"))
         {
             health--;
-
-            
             Destroy(objetoColisionado);
 
-            
             if (health <= 0)
             {
-                Destroy(gameObject);
+                if (GoldManager.Instance != null)
+                {
+                    GoldManager.Instance.AddGold(recompensaOro);
+                }
+
+                Destroy(gameObject); 
+            }
+        }
+    }
+
+    private void ProcesarAtaqueContinuo(GameObject objetoColisionado)
+    {
+        
+        if (objetoColisionado.CompareTag("Tienda") && Time.time >= tiempoSiguienteAtaque)
+        {
+            ShopHealth saludTienda = objetoColisionado.GetComponentInParent<ShopHealth>();
+            if (saludTienda == null)
+            {
+                saludTienda = objetoColisionado.GetComponent<ShopHealth>();
+            }
+
+            if (saludTienda != null)
+            {
+                saludTienda.TakeDamage(damage);
+                tiempoSiguienteAtaque = Time.time + cadenciaAtaque; 
             }
         }
     }
