@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 
-public class SistemadeOleadas : Spawner
+public class SistemadeOleadas : Spawner2
 {
     protected float timer;
     [SerializeField] private int CurrentRound = 1;
@@ -11,23 +11,23 @@ public class SistemadeOleadas : Spawner
     void Update()
     {
         Debug.Log("Ronda Actual: " + CurrentRound);
-        if (SpawnedEnemies < EnemiesPerRound)
+        if (spawnedEnemys < EnemiesPerRound)
         {
             if (timer > 5)
             {
                 timer = 0;
-                SpawnNewEnemy();
+                spawnEnemyNew();
             }
         }
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         RemainingEnemies = enemies.Length;
 
-        if (RemainingEnemies <= 0 && SpawnedEnemies == EnemiesPerRound)
+        if (RemainingEnemies <= 0 && spawnedEnemys == EnemiesPerRound)
         {
             CurrentRound++;
             EnemiesPerRound = EnemiesPerRound + 2;
-            SpawnedEnemies = 0;
+            spawnedEnemys = 0;
         }
         timer += Time.deltaTime;
     }
