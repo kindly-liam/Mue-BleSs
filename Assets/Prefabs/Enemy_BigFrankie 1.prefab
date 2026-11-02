@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3533793983960763530}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.086, y: 0.1, z: -22.85}
+  m_LocalPosition: {x: -6.086, y: 0.1, z: -23.06}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -58,7 +58,7 @@ CapsuleCollider:
   m_Radius: 0.41675
   m_Height: 1.2702782
   m_Direction: 1
-  m_Center: {x: -0.060000002, y: 0.6373285, z: 0.32999998}
+  m_Center: {x: 0, y: 0.6373285, z: 0}
 --- !u!54 &8995390769068487815
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,8 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   objetivo: {fileID: 0}
-  damage: 1
+  damage: 10
   health: 10
+  recompensaOro: 25
+  cadenciaAtaque: 4
 --- !u!195 &4257617640442695878
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -110,7 +112,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3533793983960763530}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.35
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -119,7 +121,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
+  m_Height: 1.2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 3
@@ -145,7 +147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d827b20f6c81014babb29f232c6964a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d827b20f6c81014babb29f232c6964a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -153,7 +155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d827b20f6c81014babb29f232c6964a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.289
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d827b20f6c81014babb29f232c6964a, type: 3}
       propertyPath: m_LocalRotation.w

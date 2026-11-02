@@ -1,29 +1,26 @@
 using UnityEngine;
-using TMPro; 
+using TMPro;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
 public class WaveTextObserver : MonoBehaviour
 {
-    private TextMeshProUGUI waveText;
-
-    private void Awake()
-    {
-        waveText = GetComponent<TextMeshProUGUI>();
-    }
+    [SerializeField] private TextMeshProUGUI textoRonda;
 
     private void OnEnable()
     {
-        WaveManager.OnWaveChanged += UpdateWaveText;
+        
+        WaveManager.OnWaveChanged += ActualizarTexto;
     }
 
     private void OnDisable()
     {
-        WaveManager.OnWaveChanged -= UpdateWaveText;
+        WaveManager.OnWaveChanged -= ActualizarTexto;
     }
 
-    private void UpdateWaveText(int currentWave, int maxWaves)
+    private void ActualizarTexto(int waveEnNivel)
     {
-        
-        waveText.text = $"Wave: {currentWave} / {maxWaves}";
+        if (textoRonda != null)
+        {
+            textoRonda.text = $"Wave: {waveEnNivel}/3";
+        }
     }
 }
