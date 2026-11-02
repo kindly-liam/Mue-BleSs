@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemigos = new List<GameObject>();
     [SerializeField] private float intervaloSpawn = 3f;
 
-    // Evento que avisa cuando terminaron de nacer todos los enemigos de la oleada
+    
     public static event Action OnWaveCompleted;
 
     private int enemigosTotalesOleada;
@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        // Notifica a los observadores que esta oleada terminó de instanciar sus enemigos
+        
         OnWaveCompleted?.Invoke();
     }
 }

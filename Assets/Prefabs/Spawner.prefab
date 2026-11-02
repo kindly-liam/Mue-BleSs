@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1020048698211442077}
-  - component: {fileID: 5962434298688670263}
+  - component: {fileID: 228123167229371795}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5962434298688670263
+--- !u!114 &228123167229371795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7046081180657682121}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b129578326e4c444caec9e81f933695e, type: 3}
+  m_Script: {fileID: 11500000, guid: a2b4c6fb94b3b184382ed496a1c08b38, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  Enemy: {fileID: 3429508502612888755, guid: 001dc4f18131deb4db710f06601e7697, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::SistemadeOleadas
+  SpawnedEnemies: 0
+  SpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Enemys:
+  - {fileID: 3429508502612888755, guid: 001dc4f18131deb4db710f06601e7697, type: 3}
+  - {fileID: 4390169026090619189, guid: b51e2decc3d92a74f9813595928bc5d0, type: 3}
+  CurrentRound: 1
+  RemainingEnemies: 0
+  EnemiesPerRound: 3

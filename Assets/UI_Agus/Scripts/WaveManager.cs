@@ -15,10 +15,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int maximoEnemigosPorOleada = 25;
     [SerializeField] private float tiempoEntreOleadas = 5f;
 
-    private int oleadaAbsoluta = 0; // Cuenta total interna (1, 2, 3, 4, 5...)
+    private int oleadaAbsoluta = 0; 
     public int NivelActual { get; private set; } = 0;
 
-    // Eventos separados para UI
+    
     public static event Action<int> OnWaveChanged;
     public static event Action<int> OnLevelChanged;
 
