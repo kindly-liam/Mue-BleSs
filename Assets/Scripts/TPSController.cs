@@ -71,7 +71,15 @@ public class TPSController : MonoBehaviour
         if (starterAssetsInputs.shoot)
         {
             Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
-           Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+            Transform bulletTransform = Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+
+            
+            BulletProjectile bala = bulletTransform.GetComponent<BulletProjectile>();
+            if (bala != null)
+            {
+                bala.Damage = 1 + DamageAbilityHandler.DanioActualExtra;
+            }
+
             starterAssetsInputs.shoot = false;
         }
 

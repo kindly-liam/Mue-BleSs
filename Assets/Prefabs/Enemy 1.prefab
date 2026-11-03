@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   objetivo: {fileID: 0}
   damage: 5
-  health: 5
+  health: 3
   recompensaOro: 25
   cadenciaAtaque: 1
 --- !u!195 &1447555001971778680

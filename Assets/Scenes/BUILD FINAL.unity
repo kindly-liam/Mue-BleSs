@@ -1880,6 +1880,34 @@ MonoBehaviour:
   cameraTransform: {fileID: 657851628}
   distanciaInteraccion: 6
   shopPanel: {fileID: 2619161510369442879}
+--- !u!114 &107389106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107389096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9212327bf385d6d4597c9a3ef71f3207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpeedAbilityHandler
+  multiplicadorVelocidad: 2.5
+  duracionEfecto: 5
+--- !u!114 &107389113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107389096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27698abf937c55c4391c441405d83083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageAbilityHandler
+  danioAdicional: 2
+  duracionEfecto: 10
 --- !u!1 &115148271
 GameObject:
   m_ObjectHideFlags: 0
@@ -8324,7 +8352,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: ed4114620b0fd3a4fa0cc11ba29176cf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -13540,7 +13568,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: fb3372e7f1b5b934987bf7fb1771000b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 0.303
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -19459,7 +19487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_Name
-      value: PlayerArmature
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_Layer
@@ -19642,6 +19670,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       insertIndex: -1
       addedObject: {fileID: 107389099}
+    - targetCorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 107389106}
+    - targetCorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 107389113}
   m_SourcePrefab: {fileID: 100100000, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
 --- !u!1 &2047238209
 GameObject:
@@ -19805,7 +19839,7 @@ Transform:
   m_GameObject: {fileID: 2106443796}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.88, y: 0, z: 21.83}
+  m_LocalPosition: {x: -8.88, y: 0, z: 39.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22550,9 +22584,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41d133077f7c8d4ca72fe0c0ceb0653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityManager
-  speedCooldown: 5
-  damageCooldown: 8
-  fireRateCooldown: 4
+  speedCooldown: 20
+  damageCooldown: 30
+  fireRateCooldown: 15
 --- !u!222 &4089070038163508396
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24373,7 +24407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6296853811088667112, guid: b51e2decc3d92a74f9813595928bc5d0, type: 3}
       propertyPath: health
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6296853811088667112, guid: b51e2decc3d92a74f9813595928bc5d0, type: 3}
       propertyPath: objetivo

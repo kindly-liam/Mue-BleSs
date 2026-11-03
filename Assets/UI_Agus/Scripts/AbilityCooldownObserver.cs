@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Requerido para TextMeshPro[cite: 91]
+using TMPro; 
 
 public class AbilityCooldownObserver : MonoBehaviour
 {
@@ -8,9 +8,8 @@ public class AbilityCooldownObserver : MonoBehaviour
     [SerializeField] private AbilityManager.AbilityType targetAbility;
 
     [Header("Referencias UI")]
-    [SerializeField] private Image cooldownOverlay; // La imagen "Filled" oscura
-    [SerializeField] private TextMeshProUGUI cooldownText; // Texto del contador[cite: 91]
-
+    [SerializeField] private Image cooldownOverlay; 
+    [SerializeField] private TextMeshProUGUI cooldownText; 
     private bool isCoolingDown = false;
     private float cooldownDuration;
     private float cooldownTimer;
@@ -33,7 +32,7 @@ public class AbilityCooldownObserver : MonoBehaviour
 
     private void HandleAbilityUsed(AbilityManager.AbilityType ability, float duration)
     {
-        // Solo reacciona si el evento corresponde a esta habilidad específica
+       
         if (ability == targetAbility)
         {
             cooldownDuration = duration;
@@ -56,13 +55,13 @@ public class AbilityCooldownObserver : MonoBehaviour
         }
         else
         {
-            // Actualiza la sombra rellenándose/vaciándose (1.0 -> 0.0)
+            
             if (cooldownOverlay != null)
             {
                 cooldownOverlay.fillAmount = cooldownTimer / cooldownDuration;
             }
 
-            // Muestra los segundos restantes con un decimal (ej: "3.4s")
+            
             if (cooldownText != null)
             {
                 cooldownText.text = cooldownTimer.ToString("F1") + "s";
