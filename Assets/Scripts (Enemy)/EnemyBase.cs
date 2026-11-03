@@ -3,47 +3,93 @@ using UnityEngine.AI;
 
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField] private Transform objetivo;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private int health = 5;
+    [SerializeField] private int recompensaOro = 25;
 
-    [SerializeField] private Transform objetivo; // Arrastra aquí al Jugador desde la Jerarquía
-    [SerializeField] private int damage;
-    public int Damage //Usar esta variable para asignar el daño que causa el enemigo
-    {
-        get { return damage; }
-    }
-    [SerializeField] private int health;
+    [Header("Configuración de Ataque")]
+    [SerializeField] private float cadenciaAtaque = 1f; 
+    private float tiempoSiguienteAtaque = 0f;
+
+    public int Damage => damage;
+
     private NavMeshAgent agente;
 
     void Start()
     {
         agente = GetComponent<NavMeshAgent>();
 
-        GameObject tienda = GameObject.FindGameObjectWithTag("Tienda");
-
-        if (tienda != null)
+        if (objetivo == null)
         {
-            objetivo = tienda.transform;
+            GameObject tienda = GameObject.FindGameObjectWithTag("Tienda");
+            if (tienda != null)
+            {
+                objetivo = tienda.transform;
+            }
         }
     }
 
     void Update()
     {
-        if (objetivo != null)
+        if (objetivo == null || agente == null) return;
+
+        if (agente.isActiveAndEnabled && agente.isOnNavMesh)
         {
             agente.destination = objetivo.position;
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        
+        ProcesarAtaqueContinuo(other.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ProcesarDanio(other.gameObject);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            health--;  //Quitar cuando ya consiga el daño que hace la bala del arma del juego (Usar el codigo de abajo)
+        ProcesarDanio(collision.gameObject);
+    }
 
-            //...(collision.gameObject.GetComponent<...>().damage);
-            Destroy(collision.gameObject);
+    private void ProcesarDanio(GameObject objetoColisionado)
+    {
+        if (objetoColisionado.CompareTag("Bullet"))
+        {
+            health--;
+            Destroy(objetoColisionado);
+
             if (health <= 0)
             {
-                Destroy(gameObject);
+                if (GoldManager.Instance != null)
+                {
+                    GoldManager.Instance.AddGold(recompensaOro);
+                }
+
+                Destroy(gameObject); 
+            }
+        }
+    }
+
+    private void ProcesarAtaqueContinuo(GameObject objetoColisionado)
+    {
+        
+        if (objetoColisionado.CompareTag("Tienda") && Time.time >= tiempoSiguienteAtaque)
+        {
+            ShopHealth saludTienda = objetoColisionado.GetComponentInParent<ShopHealth>();
+            if (saludTienda == null)
+            {
+                saludTienda = objetoColisionado.GetComponent<ShopHealth>();
+            }
+
+            if (saludTienda != null)
+            {
+                saludTienda.TakeDamage(damage);
+                tiempoSiguienteAtaque = Time.time + cadenciaAtaque; 
             }
         }
     }
