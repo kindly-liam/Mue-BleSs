@@ -6,10 +6,10 @@ public class AbilityManager : MonoBehaviour
 {
     public static AbilityManager Instance { get; private set; }
 
-    // Identificador para cada habilidad
+    
     public enum AbilityType { Speed, Damage, FireRate }
 
-    //(TipoHabilidad, CooldownTotal)
+   
     public static event Action<AbilityType, float> OnAbilityUsed;
 
     [Header("Tiempos de Cooldown (Segundos)")]
@@ -32,7 +32,7 @@ public class AbilityManager : MonoBehaviour
         
         if (Keyboard.current == null) return;
 
-        // Habilidad C: Aumento de Velocidad
+        
         if (Keyboard.current.cKey.wasPressedThisFrame && Time.time >= nextSpeedTime)
         {
             UseAbility(AbilityType.Speed, speedCooldown, ref nextSpeedTime);

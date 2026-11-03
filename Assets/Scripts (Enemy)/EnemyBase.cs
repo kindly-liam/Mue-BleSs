@@ -60,7 +60,19 @@ public class EnemyBase : MonoBehaviour
     {
         if (objetoColisionado.CompareTag("Bullet"))
         {
-            health--;
+            
+            BulletProjectile bala = objetoColisionado.GetComponent<BulletProjectile>();
+
+            int danioARestar = 1;
+            if (bala != null)
+            {
+                danioARestar = bala.Damage;
+            }
+
+            
+            health -= danioARestar;
+
+            
             Destroy(objetoColisionado);
 
             if (health <= 0)
@@ -70,7 +82,7 @@ public class EnemyBase : MonoBehaviour
                     GoldManager.Instance.AddGold(recompensaOro);
                 }
 
-                Destroy(gameObject); 
+                Destroy(gameObject);
             }
         }
     }
