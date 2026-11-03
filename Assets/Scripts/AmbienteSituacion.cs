@@ -10,7 +10,7 @@ public class AmbienteSituacion : MonoBehaviour
     [Header("Volúmenes")]
     [SerializeField, Range(0f, 1f)] float tiendaCalma = 0.3f;
     [SerializeField, Range(0f, 1f)] float tiendaOleada = 0.1f;
-    [SerializeField, Range(0f, 1f)] float infernalCalma = 0.6f;
+    [SerializeField, Range(0f, 1f)] float infernalCalma = 1f;
     [SerializeField, Range(0f, 1f)] float infernalOleada = 1f;
 
     [Header("Transiciones (segundos)")]

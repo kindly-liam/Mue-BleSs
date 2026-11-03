@@ -1,22 +1,21 @@
 using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
     [Header("Configuración del Raycast")]
-    [SerializeField] private Transform cameraTransform; 
-    [SerializeField] private float distanciaInteraccion = 5f; 
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private float distanciaInteraccion = 6f;
 
-    [Header("Referencias UI")]
-    [SerializeField] private GameObject shopPanel; 
+    [Header("Referencias de Managers")]
+    [SerializeField] private ShopManager shopManager;
 
     private PlayerInputActions inputActions;
 
     private void Awake()
     {
         inputActions = new PlayerInputActions();
-
-        
         inputActions.Player.Interact.performed += ctx => IntentarInteraccion();
     }
 
@@ -25,17 +24,13 @@ public class PlayerInteract : MonoBehaviour
 
     private void IntentarInteraccion()
     {
-        
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         RaycastHit hit;
 
-        
         Debug.DrawRay(ray.origin, ray.direction * distanciaInteraccion, Color.red, 2f);
 
-        
         if (Physics.Raycast(ray, out hit, distanciaInteraccion))
         {
-            
             if (hit.collider.CompareTag("Tienda"))
             {
                 AbrirMenuTienda();
@@ -45,13 +40,16 @@ public class PlayerInteract : MonoBehaviour
 
     private void AbrirMenuTienda()
     {
-        if (shopPanel != null)
+        
+        if (shopManager == null)
         {
-            shopPanel.SetActive(true); 
+            shopManager = FindFirstObjectByType<ShopManager>();
+        }
 
+        if (shopManager != null)
+        {
             
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            shopManager.AbrirTienda();
         }
     }
 }
