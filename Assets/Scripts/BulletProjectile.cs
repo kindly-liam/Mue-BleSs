@@ -1,12 +1,13 @@
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class BulletProjectile : MonoBehaviour
 {
     private Rigidbody bulletRigidbody;
 
-   
     [SerializeField] private int damage = 1;
 
+    
     public int Damage
     {
         get { return damage; }
@@ -23,6 +24,8 @@ public class BulletProjectile : MonoBehaviour
         float speed = 20f;
         bulletRigidbody.linearVelocity = transform.forward * speed;
     }
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
