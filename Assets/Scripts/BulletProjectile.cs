@@ -1,4 +1,4 @@
-using System.Xml.Serialization;
+
 using UnityEngine;
 
 public class BulletProjectile : MonoBehaviour
@@ -10,13 +10,20 @@ public class BulletProjectile : MonoBehaviour
         bulletRigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    public void Launch(float speed)
     {
-        float speed = 20f;
-        bulletRigidbody.linearVelocity = transform.forward * speed;
+        if (bulletRigidbody == null)
+        {
+            Debug.LogError(
+                $"El proyectil {name} necesita un componente Rigidbody.");
+
+            return;
+        }
+
+        bulletRigidbody.linearVelocity =
+            transform.forward * speed;
     }
 
-     
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);

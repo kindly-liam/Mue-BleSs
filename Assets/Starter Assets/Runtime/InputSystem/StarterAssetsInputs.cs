@@ -53,6 +53,9 @@ namespace StarterAssets
         public void OnShoot(InputValue value)
         {
             ShootInput(value.isPressed);
+           // bool isHoldingButton = value.Get<float>() > 0.5f;
+
+            //ShootInput(isHoldingButton);
         }
 #endif
 

@@ -5847,7 +5847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 56345c4bc54c554459a512c095c14515, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5541334708522555874, guid: 56345c4bc54c554459a512c095c14515, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -6532,7 +6532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 359892f4ef1d51044b917e7acd004c0c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4300965894984974589, guid: 359892f4ef1d51044b917e7acd004c0c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6587,7 +6587,7 @@ Transform:
   m_GameObject: {fileID: 1148556018}
   serializedVersion: 2
   m_LocalRotation: {x: 0.19421649, y: -0.5748951, z: -0.11551782, w: 0.786404}
-  m_LocalPosition: {x: -0.38636303, y: 0.12485271, z: 0.012685433}
+  m_LocalPosition: {x: -0.195, y: 0.125, z: -0.002}
   m_LocalScale: {x: 0.8186028, y: 0.818603, z: 0.81860256}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6824,13 +6824,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227394343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 084fa4cc6da45334cad0098eb4696e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pistol
-  fireRate: 0.1
+  fireRate: 0.3
   bulletSpeed: 20
+  isAutomatic: 0
   pfBulletProjectile: {fileID: 730126736}
   spawnBulletPosition: {fileID: 1148556019}
   audioSource: {fileID: 0}
@@ -7052,7 +7053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SMG
   fireRate: 0.1
-  bulletSpeed: 20
+  bulletSpeed: 50
+  isAutomatic: 1
   pfBulletProjectile: {fileID: 730126736}
   spawnBulletPosition: {fileID: 1179198614}
   audioSource: {fileID: 0}
@@ -7555,8 +7557,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfed14481b8895458656234faf190f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rifle
-  fireRate: 0.1
+  fireRate: 0.4
   bulletSpeed: 20
+  isAutomatic: 1
   pfBulletProjectile: {fileID: 730126736}
   spawnBulletPosition: {fileID: 924511134}
   audioSource: {fileID: 0}
@@ -10124,6 +10127,10 @@ MonoBehaviour:
   pfBulletProjectile: {fileID: 4219794127367278520, guid: 8f8c6caa89474ac43884413df7d6b20b, type: 3}
   spawnBulletPosition: {fileID: 924511134}
   aimVirtualCamera: {fileID: 1767184142}
+  allWeaponsInHand:
+  - {fileID: 1227394343}
+  - {fileID: 1320084117}
+  - {fileID: 1495359741}
 --- !u!114 &1967749639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11306,6 +11313,14 @@ PrefabInstance:
     - target: {fileID: 4219794127367278520, guid: 8f8c6caa89474ac43884413df7d6b20b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230018084595351855, guid: 8f8c6caa89474ac43884413df7d6b20b, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888292374756921799, guid: 8f8c6caa89474ac43884413df7d6b20b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
