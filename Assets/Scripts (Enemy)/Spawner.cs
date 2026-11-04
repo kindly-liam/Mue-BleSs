@@ -49,9 +49,15 @@ public class Spawner : MonoBehaviour
                     enemigosSpawneados++;
 
                     AudioSource audioPunto = spawnPoints[puntoRandom].GetComponent<AudioSource>();
-                    if (audioPunto != null)
+                    if (audioPunto != null && audioPunto.clip != null)
                     {
-                        audioPunto.PlayOneShot(audioPunto.clip); 
+                        
+                        audioPunto.pitch = UnityEngine.Random.Range(0.6f, 1.4f);
+
+                        
+                        float volumenAleatorio = UnityEngine.Random.Range(0.8f, 1.0f);
+
+                        audioPunto.PlayOneShot(audioPunto.clip, volumenAleatorio);
                     }
                 }
             }

@@ -13,7 +13,7 @@ public abstract class WeaponsBase : MonoBehaviour, IWeapon
 
     public abstract int AnimationID { get; }
     public GameObject WeaponGameObject => this.gameObject;
-    public float FireRate => this.fireRate;
+    public float FireRate => this.fireRate / FireRateAbilityHandler.MultiplicadorActual;
     public virtual bool IsAutomatic => this.isAutomatic;
 
     public virtual void Shoot(Vector3 aimDirection)
@@ -31,17 +31,20 @@ public abstract class WeaponsBase : MonoBehaviour, IWeapon
             spawnBulletPosition.position,
             Quaternion.LookRotation(aimDirection, Vector3.up));
 
-        BulletProjectile bulletProjectile =
-            bullet.GetComponent<BulletProjectile>();
+        
+        BulletProjectile bulletProjectile = bullet.GetComponent<BulletProjectile>();
 
         if (bulletProjectile != null)
         {
+            
+            bulletProjectile.Damage = (int)this.damage + DamageAbilityHandler.DanioActualExtra;
+
+            
             bulletProjectile.Launch(bulletSpeed);
         }
         else
         {
-            Debug.LogWarning(
-                $"El prefab {pfBulletProjectile.name} no tiene BulletProjectile.");
+            Debug.LogWarning($"El prefab {pfBulletProjectile.name} no tiene BulletProjectile.");
         }
 
         if (audioSource != null)

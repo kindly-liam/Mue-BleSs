@@ -108,17 +108,21 @@ public class EnemyBase : MonoBehaviour
     {
         if (objetoColisionado.CompareTag("Bullet"))
         {
+            
             BulletProjectile bala = objetoColisionado.GetComponent<BulletProjectile>();
 
-            int danioARestar = 1;
-            if (bala != null)
-            {
-                //danioARestar = bala.Damage;
-            }
-
-            health -= danioARestar;
+            int danioARestar = 1; 
 
             
+            if (bala != null)
+            {
+                danioARestar = bala.Damage;
+            }
+
+            
+            health -= danioARestar;
+
+
             ReproducirSFXConVariacion(sonidoDanioRecibido);
 
             Destroy(objetoColisionado);
@@ -164,14 +168,15 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    
+
     private void ReproducirSFXConVariacion(AudioClip clip)
     {
         if (fuenteAudio != null && clip != null)
         {
             fuenteAudio.pitch = Random.Range(variacionPitchMin, variacionPitchMax);
-            fuenteAudio.PlayOneShot(clip);
-            fuenteAudio.pitch = 1f;
+            float volumenAleatorio = Random.Range(0.8f, 1.0f);
+
+            fuenteAudio.PlayOneShot(clip, volumenAleatorio);
         }
     }
 }
