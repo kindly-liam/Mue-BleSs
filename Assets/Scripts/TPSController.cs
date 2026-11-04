@@ -72,14 +72,17 @@ public class TPSController : MonoBehaviour
 
     void Update()
     {
-        Vector3 mouseWorldPosition = Vector3.zero;
-        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+        //Vector3 mouseWorldPosition = Vector3.zero;
+        //Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+       // Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
-        {
-            mouseWorldPosition = raycastHit.point;
-        }
+       // if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
+        //{
+        //    mouseWorldPosition = raycastHit.point;
+       // }
+
+
+        Vector3 mouseWorldPosition = ObtenerPuntoDeMira();  
 
         if (starterAssetsInputs.aim)
         {
@@ -126,6 +129,34 @@ public class TPSController : MonoBehaviour
             starterAssetsInputs.shoot = false;
         }
     }
+
+private const float AimDistance = 1000f;
+
+private Vector3 ObtenerPuntoDeMira()
+{
+    if (Camera.main == null)
+    {
+        return transform.position + transform.forward * AimDistance;
+    }
+
+    Vector2 screenCenterPoint = new Vector2(
+        Screen.width / 2f,
+        Screen.height / 2f);
+
+    Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
+    if (Physics.Raycast(
+        ray,
+        out RaycastHit raycastHit,
+        AimDistance,
+        aimColliderLayerMask,
+        QueryTriggerInteraction.Ignore))
+    {
+        return raycastHit.point;
+    }
+
+    return ray.GetPoint(AimDistance);
+}
 
     public void ChangeWeapon(IWeapon newWeapon)
     {
