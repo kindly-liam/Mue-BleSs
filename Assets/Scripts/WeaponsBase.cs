@@ -4,6 +4,7 @@ public abstract class WeaponsBase : MonoBehaviour, IWeapon
 {
     [SerializeField] protected float fireRate = 0.1f; // Tiempo entre disparos en segundos
     [SerializeField] protected float bulletSpeed = 20f; // Velocidad de la bala
+    [SerializeField] protected float damage = 1f; // Daño de la bala
     [SerializeField] protected bool isAutomatic = false;
     [SerializeField] protected Transform pfBulletProjectile; // Prefab de la bala
     [SerializeField] protected Transform spawnBulletPosition; // Posición de disparo
