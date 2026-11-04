@@ -11,6 +11,9 @@ public class ShopHealth : MonoBehaviour
     public static event Action<float, float> OnHealthChanged;
     public static event Action OnDefeat;
 
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
+
     void Start()
     {
         currentHealth = maxHealth;

@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4131595137000682762}
-  - component: {fileID: 5753618115831660117}
+  - component: {fileID: 8618474181110901616}
   m_Layer: 0
   m_Name: BloqueD_Ambientes
   m_TagString: Untagged
@@ -292,7 +292,7 @@ Transform:
   - {fileID: 2681992660375743198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5753618115831660117
+--- !u!114 &8618474181110901616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,10 +305,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmbienteSituacion
   ambienteTienda: {fileID: 0}
-  ambienteInfernal: {fileID: 8186338942522244248}
-  tiendaCalma: 0.303
-  tiendaOleada: 0.1
-  infernalCalma: 1
+  ambienteInfernal: {fileID: 0}
+  tiendaCalma: 1
+  tiendaOleada: 0
+  infernalCalma: 0
   infernalOleada: 1
   fadeEntradaOleada: 1.5
   fadeSalidaOleada: 4
