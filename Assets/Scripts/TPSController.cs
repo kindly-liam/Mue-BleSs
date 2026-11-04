@@ -136,7 +136,10 @@ public class TPSController : MonoBehaviour
                  starterAssetsInputs.shoot = false;
             }
         }
-
+        else if ( starterAssetsInputs.shoot && !starterAssetsInputs.aim)
+        {
+            starterAssetsInputs.shoot = false;
+        }
     }
 
    

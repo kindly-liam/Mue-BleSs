@@ -3758,7 +3758,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0b6fa36784752ad44ba12bd42fd0494b, type: 2}
     - target: {fileID: 1104081842966186470, guid: 12678dc21904efc4da3d1c80d732b8ce, type: 3}
       propertyPath: m_Name
-      value: Enemy_BigFrankie
+      value: Enemy_BigFrankie2
       objectReference: {fileID: 0}
     - target: {fileID: 1831052137561029291, guid: 12678dc21904efc4da3d1c80d732b8ce, type: 3}
       propertyPath: m_LocalPosition.x
