@@ -120,6 +120,11 @@ public class TPSController : MonoBehaviour
                 starterAssetsInputs.shoot = false;
             }
         }
+       
+        else if (!starterAssetsInputs.aim)
+        {
+            starterAssetsInputs.shoot = false;
+        }
     }
 
     public void ChangeWeapon(IWeapon newWeapon)
