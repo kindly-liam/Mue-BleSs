@@ -86,7 +86,7 @@ public class EnemyBase : MonoBehaviour
             int danioARestar = 1;
             if (bala != null)
             {
-                danioARestar = bala.Damage;
+                //danioARestar = bala.Damage;
             }
 
             health -= danioARestar;
