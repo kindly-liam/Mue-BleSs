@@ -32,7 +32,15 @@ public class EnemyBase : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>(true);
+        }
         agente = GetComponent<NavMeshAgent>();
         fuenteAudio = GetComponent<AudioSource>();
 
@@ -55,7 +63,7 @@ public class EnemyBase : MonoBehaviour
 
     void Start()
     {
-        agente = GetComponent<NavMeshAgent>();
+       
 
         
         fuenteAudio = GetComponent<AudioSource>();
@@ -150,6 +158,7 @@ public class EnemyBase : MonoBehaviour
         if (objetoColisionado.CompareTag("Tienda") && Time.time >= tiempoSiguienteAtaque)
         {
             animator.SetBool("IsAttacking", true);
+            animator.SetBool("IsWalking", false);
             ShopHealth saludTienda = objetoColisionado.GetComponentInParent<ShopHealth>();
             if (saludTienda == null)
             {
