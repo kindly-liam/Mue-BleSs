@@ -158,7 +158,7 @@ public class EnemyBase : MonoBehaviour
         if (objetoColisionado.CompareTag("Tienda") && Time.time >= tiempoSiguienteAtaque)
         {
             animator.SetBool("IsAttacking", true);
-            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsWalking", false);  
             ShopHealth saludTienda = objetoColisionado.GetComponentInParent<ShopHealth>();
             if (saludTienda == null)
             {
