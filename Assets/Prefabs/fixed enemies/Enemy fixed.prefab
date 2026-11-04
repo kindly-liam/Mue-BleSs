@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1132215485206478445, guid: ebf20d3a5ee0c0445a9ded584cf8b9f7, type: 3}
       propertyPath: m_Name
-      value: Enemy Variant
+      value: Enemy fixed
       objectReference: {fileID: 0}
     - target: {fileID: 1132215485206478445, guid: ebf20d3a5ee0c0445a9ded584cf8b9f7, type: 3}
       propertyPath: m_Layer
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1132215485206478445, guid: ebf20d3a5ee0c0445a9ded584cf8b9f7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1334332484873925074, guid: ebf20d3a5ee0c0445a9ded584cf8b9f7, type: 3}
       propertyPath: m_LocalPosition.x

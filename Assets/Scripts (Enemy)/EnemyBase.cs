@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System; 
 
 public class EnemyBase : MonoBehaviour
 {
@@ -13,10 +14,10 @@ public class EnemyBase : MonoBehaviour
     private float tiempoSiguienteAtaque = 0f;
 
     [Header("Configuración de Audio")]
-    [SerializeField] private AudioClip sonidoPasoOGrunido; 
-    [SerializeField] private AudioClip sonidoDanioRecibido; 
-    [SerializeField] private AudioClip sonidoAtaqueTienda;  
-    [SerializeField] private AudioClip sonidoMuerte;        
+    [SerializeField] private AudioClip sonidoPasoOGrunido;
+    [SerializeField] private AudioClip sonidoDanioRecibido;
+    [SerializeField] private AudioClip sonidoAtaqueTienda;
+    [SerializeField] private AudioClip sonidoMuerte;
 
     [Header("Ajustes de Variación SFX")]
     [SerializeField] private float variacionPitchMin = 0.85f;
@@ -28,19 +29,13 @@ public class EnemyBase : MonoBehaviour
     private NavMeshAgent agente;
     private AudioSource fuenteAudio;
 
+    
+    public static event Action OnBossDefeated;
 
 
     private void Awake()
     {
-        if (animator == null)
-        {
-            animator = GetComponent<Animator>();
-        }
-
-        if (animator == null)
-        {
-            animator = GetComponentInChildren<Animator>(true);
-        }
+        animator = GetComponentInChildren<Animator>();
         agente = GetComponent<NavMeshAgent>();
         fuenteAudio = GetComponent<AudioSource>();
 
@@ -60,12 +55,10 @@ public class EnemyBase : MonoBehaviour
     }
 
 
-
     void Start()
     {
-       
+        agente = GetComponent<NavMeshAgent>();
 
-        
         fuenteAudio = GetComponent<AudioSource>();
         if (fuenteAudio != null && sonidoPasoOGrunido != null)
         {
@@ -116,23 +109,17 @@ public class EnemyBase : MonoBehaviour
     {
         if (objetoColisionado.CompareTag("Bullet"))
         {
-            
             BulletProjectile bala = objetoColisionado.GetComponent<BulletProjectile>();
+            int danioARestar = 1;
 
-            int danioARestar = 1; 
-
-            
             if (bala != null)
             {
                 danioARestar = bala.Damage;
             }
 
-            
             health -= danioARestar;
 
-
             ReproducirSFXConVariacion(sonidoDanioRecibido);
-
             Destroy(objetoColisionado);
 
             if (health <= 0)
@@ -142,10 +129,15 @@ public class EnemyBase : MonoBehaviour
                     GoldManager.Instance.AddGold(recompensaOro);
                 }
 
-                
                 if (sonidoMuerte != null)
                 {
                     AudioSource.PlayClipAtPoint(sonidoMuerte, transform.position, 1f);
+                }
+
+                
+                if (gameObject.CompareTag("Boss"))
+                {
+                    OnBossDefeated?.Invoke();
                 }
 
                 Destroy(gameObject);
@@ -158,7 +150,6 @@ public class EnemyBase : MonoBehaviour
         if (objetoColisionado.CompareTag("Tienda") && Time.time >= tiempoSiguienteAtaque)
         {
             animator.SetBool("IsAttacking", true);
-            animator.SetBool("IsWalking", false);  
             ShopHealth saludTienda = objetoColisionado.GetComponentInParent<ShopHealth>();
             if (saludTienda == null)
             {
@@ -169,7 +160,6 @@ public class EnemyBase : MonoBehaviour
             {
                 saludTienda.TakeDamage(damage);
 
-                
                 ReproducirSFXConVariacion(sonidoAtaqueTienda);
 
                 tiempoSiguienteAtaque = Time.time + cadenciaAtaque;
@@ -177,13 +167,12 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-
     private void ReproducirSFXConVariacion(AudioClip clip)
     {
         if (fuenteAudio != null && clip != null)
         {
-            fuenteAudio.pitch = Random.Range(variacionPitchMin, variacionPitchMax);
-            float volumenAleatorio = Random.Range(0.8f, 1.0f);
+            fuenteAudio.pitch = UnityEngine.Random.Range(variacionPitchMin, variacionPitchMax);
+            float volumenAleatorio = UnityEngine.Random.Range(0.8f, 1.0f);
 
             fuenteAudio.PlayOneShot(clip, volumenAleatorio);
         }

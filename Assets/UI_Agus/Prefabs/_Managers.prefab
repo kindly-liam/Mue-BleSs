@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2301824051439609485}
   - component: {fileID: 322311433943372437}
   - component: {fileID: 943634095794462549}
+  - component: {fileID: 6469859667429552020}
   m_Layer: 0
   m_Name: _Managers
   m_TagString: Untagged
@@ -242,3 +243,17 @@ MonoBehaviour:
   soundCerrarTienda: {fileID: 8300000, guid: 29e6b43b609fc214189416026a8820f8, type: 3}
   soundCompraExitosa: {fileID: 8300000, guid: 1be5daf5ba9306947ab538e4f35513fe, type: 3}
   soundCompraFallida: {fileID: 8300000, guid: f53b1f47d65e36f43a7c8b96e5d8649f, type: 3}
+--- !u!114 &6469859667429552020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617028207410452167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78016093f0525b54d8c7241713b6096b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VictoryManager
+  victoryPanel: {fileID: 0}
+  nombreEscenaMenu: MainMenu

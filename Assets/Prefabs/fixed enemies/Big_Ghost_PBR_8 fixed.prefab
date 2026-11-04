@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 821124677672659036, guid: d07c494421cb7564886ba95c3afd9de9, type: 3}
       propertyPath: m_Name
-      value: Big_Ghost_PBR_8 Variant
+      value: Big_Ghost_PBR_8 fixed
       objectReference: {fileID: 0}
     - target: {fileID: 821124677672659036, guid: d07c494421cb7564886ba95c3afd9de9, type: 3}
       propertyPath: m_Layer
@@ -138,7 +138,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.17
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -161,10 +161,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2086527
-  m_Height: 5.32
+  m_Radius: 0.5026396
+  m_Height: 1.9669702
   m_Direction: 1
-  m_Center: {x: -0.14862025, y: 1.91, z: 0.38999996}
+  m_Center: {x: -0.020000005, y: 0.23349248, z: 0.04999999}
 --- !u!54 &5554973282060752285
 Rigidbody:
   m_ObjectHideFlags: 0
