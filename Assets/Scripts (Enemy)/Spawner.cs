@@ -10,7 +10,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemigos = new List<GameObject>();
     [SerializeField] private float intervaloSpawn = 3f;
 
-    
+   
+
+
     public static event Action OnWaveCompleted;
 
     private int enemigosTotalesOleada;
@@ -39,13 +41,32 @@ public class Spawner : MonoBehaviour
 
                 if (enemigos[enemigoRandom] != null && spawnPoints[puntoRandom] != null)
                 {
+                    
+
                     Instantiate(enemigos[enemigoRandom], spawnPoints[puntoRandom].transform.position, Quaternion.identity);
+
+
                     enemigosSpawneados++;
+
+                    AudioSource audioPunto = spawnPoints[puntoRandom].GetComponent<AudioSource>();
+                    if (audioPunto != null && audioPunto.clip != null)
+                    {
+                        
+                        audioPunto.pitch = UnityEngine.Random.Range(0.6f, 1.4f);
+
+                        
+                        float volumenAleatorio = UnityEngine.Random.Range(0.8f, 1.0f);
+
+                        audioPunto.PlayOneShot(audioPunto.clip, volumenAleatorio);
+                    }
                 }
             }
         }
+       
 
         
+
+
         OnWaveCompleted?.Invoke();
     }
 }

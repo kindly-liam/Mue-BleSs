@@ -8,11 +8,12 @@ TagManager:
   - Enemy
   - Bullet
   - Tienda
+  - Boss
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - AimTarget
   - Water
   - UI
   - 

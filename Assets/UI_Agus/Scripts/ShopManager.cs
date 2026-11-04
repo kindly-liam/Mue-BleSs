@@ -20,6 +20,11 @@ public class ShopManager : MonoBehaviour
     public static event Action OnSubfusilComprado;
 
     
+    public static event Action OnTiendaAbierta;
+    public static event Action OnTiendaCerrada;
+    public static event Action OnCompraExitosa;
+    public static event Action OnCompraFallida;
+
     public void ComprarTorreta()
     {
         if (torretaPrefab != null && spawnPointTorreta != null)
@@ -28,10 +33,12 @@ public class ShopManager : MonoBehaviour
             {
                 Instantiate(torretaPrefab, spawnPointTorreta.position, spawnPointTorreta.rotation);
                 Debug.Log($"Torreta comprada por {precioTorreta} de oro.");
+                OnCompraExitosa?.Invoke();
             }
             else
             {
                 Debug.Log("Oro insuficiente para la Torreta.");
+                OnCompraFallida?.Invoke();
             }
         }
     }
@@ -41,12 +48,13 @@ public class ShopManager : MonoBehaviour
         if (GoldManager.Instance != null && GoldManager.Instance.TrySpendGold(precioFusil))
         {
             Debug.Log($"Fusil comprado por {precioFusil} de oro.");
-            
             OnFusilComprado?.Invoke();
+            OnCompraExitosa?.Invoke();
         }
         else
         {
             Debug.Log("Oro insuficiente para el Fusil.");
+            OnCompraFallida?.Invoke();
         }
     }
 
@@ -55,26 +63,26 @@ public class ShopManager : MonoBehaviour
         if (GoldManager.Instance != null && GoldManager.Instance.TrySpendGold(precioSubfusil))
         {
             Debug.Log($"Subfusil comprado por {precioSubfusil} de oro.");
-            
             OnSubfusilComprado?.Invoke();
+            OnCompraExitosa?.Invoke();
         }
         else
         {
             Debug.Log("Oro insuficiente para el Subfusil.");
+            OnCompraFallida?.Invoke();
         }
     }
+
     public void AbrirTienda()
     {
         if (shopPanel != null)
         {
-            
             shopPanel.SetActive(true);
-
-            
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
             
+            OnTiendaAbierta?.Invoke();
         }
     }
 
@@ -82,6 +90,9 @@ public class ShopManager : MonoBehaviour
     {
         if (shopPanel != null)
         {
+            
+            OnTiendaCerrada?.Invoke();
+
             shopPanel.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

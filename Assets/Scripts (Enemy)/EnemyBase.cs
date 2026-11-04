@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System; 
 
 public class EnemyBase : MonoBehaviour
 {
@@ -9,16 +10,64 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private int recompensaOro = 25;
 
     [Header("Configuración de Ataque")]
-    [SerializeField] private float cadenciaAtaque = 1f; 
+    [SerializeField] private float cadenciaAtaque = 1f;
     private float tiempoSiguienteAtaque = 0f;
 
+    [Header("Configuración de Audio")]
+    [SerializeField] private AudioClip sonidoPasoOGrunido;
+    [SerializeField] private AudioClip sonidoDanioRecibido;
+    [SerializeField] private AudioClip sonidoAtaqueTienda;
+    [SerializeField] private AudioClip sonidoMuerte;
+
+    [Header("Ajustes de Variación SFX")]
+    [SerializeField] private float variacionPitchMin = 0.85f;
+    [SerializeField] private float variacionPitchMax = 1.15f;
+
     public int Damage => damage;
+    private Animator animator;
 
     private NavMeshAgent agente;
+    private AudioSource fuenteAudio;
+
+    
+    public static event Action OnBossDefeated;
+
+
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+        agente = GetComponent<NavMeshAgent>();
+        fuenteAudio = GetComponent<AudioSource>();
+
+        if (animator == null)
+        {
+            Debug.LogError(
+                $"No se encontró un Animator en {name} ni en sus hijos.",
+                this);
+        }
+
+        if (agente == null)
+        {
+            Debug.LogError(
+                $"No se encontró un NavMeshAgent en {name}.",
+                this);
+        }
+    }
+
 
     void Start()
     {
         agente = GetComponent<NavMeshAgent>();
+
+        fuenteAudio = GetComponent<AudioSource>();
+        if (fuenteAudio != null && sonidoPasoOGrunido != null)
+        {
+            fuenteAudio.clip = sonidoPasoOGrunido;
+            if (!fuenteAudio.isPlaying)
+            {
+                fuenteAudio.Play();
+            }
+        }
 
         if (objetivo == null)
         {
@@ -37,12 +86,12 @@ public class EnemyBase : MonoBehaviour
         if (agente.isActiveAndEnabled && agente.isOnNavMesh)
         {
             agente.destination = objetivo.position;
+            animator.SetBool("IsWalking", true);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        
         ProcesarAtaqueContinuo(other.gameObject);
     }
 
@@ -60,7 +109,17 @@ public class EnemyBase : MonoBehaviour
     {
         if (objetoColisionado.CompareTag("Bullet"))
         {
-            health--;
+            BulletProjectile bala = objetoColisionado.GetComponent<BulletProjectile>();
+            int danioARestar = 1;
+
+            if (bala != null)
+            {
+                danioARestar = bala.Damage;
+            }
+
+            health -= danioARestar;
+
+            ReproducirSFXConVariacion(sonidoDanioRecibido);
             Destroy(objetoColisionado);
 
             if (health <= 0)
@@ -70,16 +129,27 @@ public class EnemyBase : MonoBehaviour
                     GoldManager.Instance.AddGold(recompensaOro);
                 }
 
-                Destroy(gameObject); 
+                if (sonidoMuerte != null)
+                {
+                    AudioSource.PlayClipAtPoint(sonidoMuerte, transform.position, 1f);
+                }
+
+                
+                if (gameObject.CompareTag("Boss"))
+                {
+                    OnBossDefeated?.Invoke();
+                }
+
+                Destroy(gameObject);
             }
         }
     }
 
     private void ProcesarAtaqueContinuo(GameObject objetoColisionado)
     {
-        
         if (objetoColisionado.CompareTag("Tienda") && Time.time >= tiempoSiguienteAtaque)
         {
+            animator.SetBool("IsAttacking", true);
             ShopHealth saludTienda = objetoColisionado.GetComponentInParent<ShopHealth>();
             if (saludTienda == null)
             {
@@ -89,8 +159,22 @@ public class EnemyBase : MonoBehaviour
             if (saludTienda != null)
             {
                 saludTienda.TakeDamage(damage);
-                tiempoSiguienteAtaque = Time.time + cadenciaAtaque; 
+
+                ReproducirSFXConVariacion(sonidoAtaqueTienda);
+
+                tiempoSiguienteAtaque = Time.time + cadenciaAtaque;
             }
+        }
+    }
+
+    private void ReproducirSFXConVariacion(AudioClip clip)
+    {
+        if (fuenteAudio != null && clip != null)
+        {
+            fuenteAudio.pitch = UnityEngine.Random.Range(variacionPitchMin, variacionPitchMax);
+            float volumenAleatorio = UnityEngine.Random.Range(0.8f, 1.0f);
+
+            fuenteAudio.PlayOneShot(clip, volumenAleatorio);
         }
     }
 }
