@@ -5,6 +5,15 @@ public class BulletProjectile : MonoBehaviour
 {
     private Rigidbody bulletRigidbody;
 
+    [SerializeField] private int damage = 1;
+
+    
+    public int Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
+
     private void Awake()
     {
         bulletRigidbody = GetComponent<Rigidbody>();
