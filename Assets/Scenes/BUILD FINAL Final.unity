@@ -11329,6 +11329,7 @@ MonoBehaviour:
   pfBulletProjectile: {fileID: 1705255333}
   spawnBulletPosition: {fileID: 1270896380}
   audioSource: {fileID: 737581158}
+  soundDisparo: {fileID: 0}
   sonidoDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
   pitchMin: 0.92
   pitchMax: 1.08
@@ -11600,6 +11601,7 @@ MonoBehaviour:
   pfBulletProjectile: {fileID: 1705255333}
   spawnBulletPosition: {fileID: 162242230}
   audioSource: {fileID: 760298749}
+  soundDisparo: {fileID: 0}
   sonidoDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
   pitchMin: 0.92
   pitchMax: 1.08
@@ -18473,6 +18475,7 @@ MonoBehaviour:
   pfBulletProjectile: {fileID: 1705255333}
   spawnBulletPosition: {fileID: 1170216350}
   audioSource: {fileID: 1139457418}
+  soundDisparo: {fileID: 0}
   sonidoDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
   pitchMin: 0.92
   pitchMax: 1.08
@@ -30521,6 +30524,10 @@ PrefabInstance:
     - target: {fileID: 1029179726607438198, guid: 0a7a1aa0c0287964cb69eb9f7b3e8020, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777415279340444908, guid: 0a7a1aa0c0287964cb69eb9f7b3e8020, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

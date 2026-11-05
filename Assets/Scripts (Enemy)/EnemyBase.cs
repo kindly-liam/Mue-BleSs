@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System; 
+using System;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -11,7 +11,9 @@ public class EnemyBase : MonoBehaviour
 
     [Header("Configuración de Ataque")]
     [SerializeField] private float cadenciaAtaque = 1f;
+    [SerializeField] private float rangoAtaque = 3.5f; // NUEVO: A qué distancia empieza a pegar
     private float tiempoSiguienteAtaque = 0f;
+    private ShopHealth saludTienda; // Guardamos la referencia a la tienda para optimizar
 
     [Header("Configuración de Audio")]
     [SerializeField] private AudioClip sonidoPasoOGrunido;
@@ -29,7 +31,6 @@ public class EnemyBase : MonoBehaviour
     private NavMeshAgent agente;
     private AudioSource fuenteAudio;
 
-    
     public static event Action OnBossDefeated;
 
 
@@ -40,41 +41,34 @@ public class EnemyBase : MonoBehaviour
         fuenteAudio = GetComponent<AudioSource>();
 
         if (animator == null)
-        {
-            Debug.LogError(
-                $"No se encontró un Animator en {name} ni en sus hijos.",
-                this);
-        }
+            Debug.LogError($"No se encontró un Animator en {name}.", this);
 
         if (agente == null)
-        {
-            Debug.LogError(
-                $"No se encontró un NavMeshAgent en {name}.",
-                this);
-        }
+            Debug.LogError($"No se encontró un NavMeshAgent en {name}.", this);
     }
-
 
     void Start()
     {
         agente = GetComponent<NavMeshAgent>();
-
         fuenteAudio = GetComponent<AudioSource>();
+
         if (fuenteAudio != null && sonidoPasoOGrunido != null)
         {
             fuenteAudio.clip = sonidoPasoOGrunido;
-            if (!fuenteAudio.isPlaying)
-            {
-                fuenteAudio.Play();
-            }
+            if (!fuenteAudio.isPlaying) fuenteAudio.Play();
         }
 
+        // Buscamos la tienda al aparecer
         if (objetivo == null)
         {
             GameObject tienda = GameObject.FindGameObjectWithTag("Tienda");
             if (tienda != null)
             {
                 objetivo = tienda.transform;
+
+                // Intentamos conseguir el script de vida de la tienda de una sola vez
+                saludTienda = tienda.GetComponentInParent<ShopHealth>();
+                if (saludTienda == null) saludTienda = tienda.GetComponent<ShopHealth>();
             }
         }
     }
@@ -85,14 +79,39 @@ public class EnemyBase : MonoBehaviour
 
         if (agente.isActiveAndEnabled && agente.isOnNavMesh)
         {
-            agente.destination = objetivo.position;
-            animator.SetBool("IsWalking", true);
+            float distancia = Vector3.Distance(transform.position, objetivo.position);
+
+            // Si está más lejos que el rango de ataque, camina hacia el objetivo
+            if (distancia > rangoAtaque)
+            {
+                agente.isStopped = false;
+                agente.destination = objetivo.position;
+                animator.SetBool("IsWalking", true);
+                animator.SetBool("IsAttacking", false); // Apaga el ataque mientras camina
+            }
+            else
+            {
+                // Si llegó a la distancia de ataque, frena y ataca sin depender de colliders
+                agente.isStopped = true;
+                animator.SetBool("IsWalking", false);
+
+                ProcesarAtaquePorDistancia();
+            }
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    // NUEVA FUNCIÓN: Ataca basado en el tiempo y la distancia, no en TriggerStay
+    private void ProcesarAtaquePorDistancia()
     {
-        ProcesarAtaqueContinuo(other.gameObject);
+        if (Time.time >= tiempoSiguienteAtaque && saludTienda != null)
+        {
+            animator.SetBool("IsAttacking", true);
+
+            saludTienda.TakeDamage(damage);
+            ReproducirSFXConVariacion(sonidoAtaqueTienda);
+
+            tiempoSiguienteAtaque = Time.time + cadenciaAtaque;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -112,68 +131,32 @@ public class EnemyBase : MonoBehaviour
             BulletProjectile bala = objetoColisionado.GetComponent<BulletProjectile>();
             int danioARestar = 1;
 
-            if (bala != null)
-            {
-                danioARestar = bala.Damage;
-            }
+            if (bala != null) danioARestar = bala.Damage;
 
             health -= danioARestar;
-
             ReproducirSFXConVariacion(sonidoDanioRecibido);
             Destroy(objetoColisionado);
 
             if (health <= 0)
             {
-                if (GoldManager.Instance != null)
-                {
-                    GoldManager.Instance.AddGold(recompensaOro);
-                }
+                if (GoldManager.Instance != null) GoldManager.Instance.AddGold(recompensaOro);
 
-                if (sonidoMuerte != null)
-                {
-                    AudioSource.PlayClipAtPoint(sonidoMuerte, transform.position, 1f);
-                }
+                if (sonidoMuerte != null) AudioSource.PlayClipAtPoint(sonidoMuerte, transform.position, 1f);
 
-                
-                if (gameObject.CompareTag("Boss"))
-                {
-                    OnBossDefeated?.Invoke();
-                }
+                if (gameObject.CompareTag("Boss")) OnBossDefeated?.Invoke();
 
                 Destroy(gameObject);
             }
         }
     }
 
-    private void ProcesarAtaqueContinuo(GameObject objetoColisionado)
-    {
-        if (objetoColisionado.CompareTag("Tienda") && Time.time >= tiempoSiguienteAtaque)
-        {
-            animator.SetBool("IsAttacking", true);
-            ShopHealth saludTienda = objetoColisionado.GetComponentInParent<ShopHealth>();
-            if (saludTienda == null)
-            {
-                saludTienda = objetoColisionado.GetComponent<ShopHealth>();
-            }
-
-            if (saludTienda != null)
-            {
-                saludTienda.TakeDamage(damage);
-
-                ReproducirSFXConVariacion(sonidoAtaqueTienda);
-
-                tiempoSiguienteAtaque = Time.time + cadenciaAtaque;
-            }
-        }
-    }
-
     private void ReproducirSFXConVariacion(AudioClip clip)
     {
-        if (fuenteAudio != null && clip != null)
+        // Se mantiene la prevención de seguridad para que el AudioSource apagado no tire error
+        if (fuenteAudio != null && clip != null && fuenteAudio.isActiveAndEnabled)
         {
             fuenteAudio.pitch = UnityEngine.Random.Range(variacionPitchMin, variacionPitchMax);
             float volumenAleatorio = UnityEngine.Random.Range(0.8f, 1.0f);
-
             fuenteAudio.PlayOneShot(clip, volumenAleatorio);
         }
     }
