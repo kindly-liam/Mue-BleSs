@@ -10,6 +10,11 @@ public abstract class WeaponsBase : MonoBehaviour, IWeapon
     [SerializeField] protected Transform spawnBulletPosition; // Posición de disparo
     [SerializeField] private AudioSource audioSource; // Fuente de audio para el sonido de disparo
 
+    [Header("Configuración de Audio (Bloque C)")]
+    [SerializeField] private AudioClip sonidoDisparo;
+    [SerializeField] private float pitchMin = 0.92f;
+    [SerializeField] private float pitchMax = 1.08f;
+
 
     public abstract int AnimationID { get; }
     public GameObject WeaponGameObject => this.gameObject;
@@ -47,9 +52,15 @@ public abstract class WeaponsBase : MonoBehaviour, IWeapon
             Debug.LogWarning($"El prefab {pfBulletProjectile.name} no tiene BulletProjectile.");
         }
 
-        if (audioSource != null)
+        ReproducirSonidoDisparo();
+    }
+
+    protected virtual void ReproducirSonidoDisparo()
+    {
+        if (audioSource != null && sonidoDisparo != null)
         {
-            audioSource.Play();
+            audioSource.pitch = Random.Range(pitchMin, pitchMax);
+            audioSource.PlayOneShot(sonidoDisparo);
         }
     }
 }
