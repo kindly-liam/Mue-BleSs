@@ -145,12 +145,7 @@ private Vector3 ObtenerPuntoDeMira()
 
     Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
-    if (Physics.Raycast(
-        ray,
-        out RaycastHit raycastHit,
-        AimDistance,
-        aimColliderLayerMask,
-        QueryTriggerInteraction.Ignore))
+    if (Physics.Raycast( ray, out RaycastHit raycastHit, AimDistance, aimColliderLayerMask, QueryTriggerInteraction.Ignore))
     {
         return raycastHit.point;
     }
