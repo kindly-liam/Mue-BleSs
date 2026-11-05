@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Torreta : MonoBehaviour
 {
     [Header("Objetivo")]
@@ -12,6 +13,11 @@ public class Torreta : MonoBehaviour
     [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private float bulletSpeed = 35f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip sonidoDisparo;
+    [SerializeField] private float pitchMin = 0.9f;
+    [SerializeField] private float pitchMax = 1.1f;
+
     [Header("Rotación")]
     [SerializeField] private float velocidadRotacion = 360f;
     [SerializeField] private bool dispararSoloCuandoApunta = true;
@@ -20,9 +26,12 @@ public class Torreta : MonoBehaviour
     private EnemyBase objetivoActual;
     private float siguienteDisparo;
     private bool tieneObjetivo;
+    private AudioSource fuenteAudio;
 
     private void Awake()
     {
+        fuenteAudio = GetComponent<AudioSource>();
+
         if (spawnBulletPosition == null)
         {
             Debug.LogError(
@@ -172,6 +181,17 @@ public class Torreta : MonoBehaviour
             Debug.LogWarning(
                 $"El prefab {pfBulletProjectile.name} no tiene BulletProjectile.",
                 bala);
+        }
+
+        ReproducirSonidoDisparo();
+    }
+
+    private void ReproducirSonidoDisparo()
+    {
+        if (fuenteAudio != null && sonidoDisparo != null && fuenteAudio.isActiveAndEnabled)
+        {
+            fuenteAudio.pitch = Random.Range(pitchMin, pitchMax);
+            fuenteAudio.PlayOneShot(sonidoDisparo);
         }
     }
 

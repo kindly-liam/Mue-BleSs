@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float tiempoEntreOleadas = 5f;
 
     private int oleadaAbsoluta = 0;
+
     public int NivelActual { get; private set; } = 0;
 
     public static event Action<int> OnWaveChanged;
@@ -25,8 +26,14 @@ public class WaveManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -46,22 +53,27 @@ public class WaveManager : MonoBehaviour
 
     private void HandleWaveCompleted()
     {
-       
         if (oleadaAbsoluta == 3)
         {
-            Debug.Log("¡Nivel 1 completado! Entrando a la Boss Fight...");
+            ActivarMusicaBoss();
+
+            Debug.Log(
+                "¡Nivel 1 completado! Entrando a la Boss Fight...");
+
             SceneManager.LoadScene("Boss Fight");
         }
         else
         {
             
             StartCoroutine(RutinaTiempoEntreOleadas());
+            ActivarMusicaEntreOleadas();
         }
     }
 
     private IEnumerator RutinaTiempoEntreOleadas()
     {
         yield return new WaitForSeconds(tiempoEntreOleadas);
+
         IniciarSiguienteOleada();
     }
 
@@ -73,8 +85,11 @@ public class WaveManager : MonoBehaviour
         }
         oleadaAbsoluta++;
 
-        int nuevoNivel = ((oleadaAbsoluta - 1) / 3) + 1;
-        int waveEnNivel = ((oleadaAbsoluta - 1) % 3) + 1;
+        int nuevoNivel =
+            ((oleadaAbsoluta - 1) / 3) + 1;
+
+        int waveEnNivel =
+            ((oleadaAbsoluta - 1) % 3) + 1;
 
         OnWaveChanged?.Invoke(waveEnNivel);
 
@@ -84,12 +99,68 @@ public class WaveManager : MonoBehaviour
             OnLevelChanged?.Invoke(NivelActual);
         }
 
-        int cantidadCalculada = enemigosBase + ((oleadaAbsoluta - 1) * incrementoPorOleada);
-        int enemigosAInstanciar = Mathf.Min(cantidadCalculada, maximoEnemigosPorOleada);
+        int cantidadCalculada =
+            enemigosBase +
+            ((oleadaAbsoluta - 1) * incrementoPorOleada);
+
+        int enemigosAInstanciar =
+            Mathf.Min(
+                cantidadCalculada,
+                maximoEnemigosPorOleada);
+
+        ActivarMusicaOleada();
 
         if (spawner != null)
         {
             spawner.IniciarOleada(enemigosAInstanciar);
         }
+        else
+        {
+            Debug.LogWarning(
+                "WaveManager no tiene un Spawner asignado.",
+                this);
+        }
+    }
+
+    private void ActivarMusicaEntreOleadas()
+    {
+        if (GestorMusicaAdaptativa.Instancia == null)
+        {
+            Debug.LogWarning(
+                "No existe una instancia de GestorMusicaAdaptativa.");
+
+            return;
+        }
+
+        GestorMusicaAdaptativa.Instancia
+            .ActivarEntreOleadas();
+    }
+
+    private void ActivarMusicaOleada()
+    {
+        if (GestorMusicaAdaptativa.Instancia == null)
+        {
+            Debug.LogWarning(
+                "No existe una instancia de GestorMusicaAdaptativa.");
+
+            return;
+        }
+
+        GestorMusicaAdaptativa.Instancia
+            .ActivarOleadaNormal();
+    }
+
+    private void ActivarMusicaBoss()
+    {
+        if (GestorMusicaAdaptativa.Instancia == null)
+        {
+            Debug.LogWarning(
+                "No existe una instancia de GestorMusicaAdaptativa.");
+
+            return;
+        }
+
+        GestorMusicaAdaptativa.Instancia
+            .ActivarPeleaBoss();
     }
 }
