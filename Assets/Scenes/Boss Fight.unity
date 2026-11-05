@@ -24836,7 +24836,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ccongratulations
+  m_text: Congratulations
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f0e9f5c626523f942bb8bf0b1b646b55, type: 2}
   m_sharedMaterial: {fileID: 4091077068981602759, guid: f0e9f5c626523f942bb8bf0b1b646b55, type: 2}
