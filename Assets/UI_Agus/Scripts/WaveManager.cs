@@ -9,6 +9,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("Referencias")]
     [SerializeField] private Spawner spawner;
+    [SerializeField] private VoiceLinesObserver voiceLinesObserver;
 
     [Header("Configuración de Oleadas")]
     [SerializeField] private int enemigosBase = 5;
@@ -66,6 +67,10 @@ public class WaveManager : MonoBehaviour
 
     public void IniciarSiguienteOleada()
     {
+        if (voiceLinesObserver != null)
+        {
+            voiceLinesObserver.ReproducirSecuenciaInicio();
+        }
         oleadaAbsoluta++;
 
         int nuevoNivel = ((oleadaAbsoluta - 1) / 3) + 1;

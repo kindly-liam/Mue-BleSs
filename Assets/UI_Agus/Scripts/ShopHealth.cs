@@ -6,6 +6,7 @@ public class ShopHealth : MonoBehaviour
 {
     public float maxHealth = 500f;
     private float currentHealth;
+    public VoiceLinesObserver voiceLinesObserver;
 
     
     public static event Action<float, float> OnHealthChanged;
@@ -28,6 +29,10 @@ public class ShopHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            if (voiceLinesObserver != null)
+            {
+                voiceLinesObserver.ReproducirSecuenciaDerrota();
+            }
             currentHealth = 0;
             OnDefeat?.Invoke(); 
         }

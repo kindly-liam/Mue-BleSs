@@ -9,6 +9,7 @@ public abstract class WeaponsBase : MonoBehaviour, IWeapon
     [SerializeField] protected Transform pfBulletProjectile; // Prefab de la bala
     [SerializeField] protected Transform spawnBulletPosition; // Posición de disparo
     [SerializeField] private AudioSource audioSource; // Fuente de audio para el sonido de disparo
+    [SerializeField] private AudioClip soundDisparo;
 
 
     public abstract int AnimationID { get; }
@@ -24,6 +25,11 @@ public abstract class WeaponsBase : MonoBehaviour, IWeapon
                 $"El arma {name} no tiene proyectil o punto de disparo asignado.");
 
             return;
+        }
+
+        if (audioSource != null && soundDisparo != null)
+        {
+            audioSource.PlayOneShot(soundDisparo);
         }
 
         Transform bullet = Instantiate(
