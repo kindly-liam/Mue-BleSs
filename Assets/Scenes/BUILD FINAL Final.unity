@@ -6245,6 +6245,17 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &304789697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2909771954607135157, guid: 0a7a1aa0c0287964cb69eb9f7b3e8020, type: 3}
+  m_PrefabInstance: {fileID: 8981618302695150224}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ab70d29fc820940a5bc012e8065349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopHealth
 --- !u!4 &305754896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4245139482653886047, guid: 18833a5b14fbb4c4d9a9c2e06a4d3c90, type: 3}
@@ -19032,7 +19043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopHealthAudioController
   audioMixer: {fileID: 24100000, guid: f19d1396979f4df46964e30301473442, type: 2}
-  shopHealth: {fileID: 2785101679743801069}
+  shopHealth: {fileID: 304789697}
   paramPitch: MusicPitch
   paramCutoff: LowpassCutoff
 --- !u!4 &1181096653
@@ -30020,17 +30031,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3740320014527473350, guid: e53062167c179ac49ae90bcc8c17028a, type: 3}
   m_PrefabInstance: {fileID: 9109431390224901984}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2785101679743801069 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2692176230200292492, guid: e53062167c179ac49ae90bcc8c17028a, type: 3}
-  m_PrefabInstance: {fileID: 9109431390224901984}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66ab70d29fc820940a5bc012e8065349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopHealth
 --- !u!1001 &6681053779071245536
 PrefabInstance:
   m_ObjectHideFlags: 0

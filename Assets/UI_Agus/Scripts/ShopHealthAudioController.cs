@@ -15,14 +15,11 @@ public class ShopHealthAudioController : MonoBehaviour
     {
         if (shopHealth == null || audioMixer == null) return;
 
-        
         float porcentajeVida = shopHealth.CurrentHealth / shopHealth.MaxHealth;
 
-       
-        float pitchCalculado = Mathf.Lerp(1.15f, 0.9f, porcentajeVida);
+        float pitchCalculado = Mathf.Lerp(1.15f, 1.00f, porcentajeVida);
         audioMixer.SetFloat(paramPitch, pitchCalculado);
 
-        
         float cutoffCalculado = (porcentajeVida < 0.3f) ? 1200f : 22000f;
         audioMixer.SetFloat(paramCutoff, cutoffCalculado);
     }
