@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9af23ba5fa5364ff598888460e0e2759, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -9497,6 +9497,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e64ec5967ce371746893d1f114b6ece8, type: 3}
   m_PrefabInstance: {fileID: 535468595}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &535773156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 535773158}
+  - component: {fileID: 535773157}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &535773157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535773156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 437e9da277c0a3d4f8eb973cc4f5ca20, type: 2}
+--- !u!4 &535773158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535773156}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.9979763, y: 14.779976, z: 4.589454}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &567303738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12005,7 +12054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d589fd32ca4fff4e8bbeac01749561a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SMG
-  fireRate: 0.1
+  fireRate: 0.3
   bulletSpeed: 50
   damage: 1
   isAutomatic: 1
@@ -12013,7 +12062,7 @@ MonoBehaviour:
   spawnBulletPosition: {fileID: 1270896380}
   audioSource: {fileID: 737581158}
   soundDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
-  sonidoDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
+  sonidoDisparo: {fileID: 8300000, guid: fb36286f68e3ce14aa5c895a4880a1fb, type: 3}
   pitchMin: 0.92
   pitchMax: 1.08
 --- !u!82 &737581158
@@ -12278,14 +12327,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pistol
   fireRate: 0.3
-  bulletSpeed: 20
+  bulletSpeed: 100
   damage: 2
   isAutomatic: 0
   pfBulletProjectile: {fileID: 1705255333}
   spawnBulletPosition: {fileID: 162242230}
   audioSource: {fileID: 760298749}
   soundDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
-  sonidoDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
+  sonidoDisparo: {fileID: 8300000, guid: fb36286f68e3ce14aa5c895a4880a1fb, type: 3}
   pitchMin: 0.92
   pitchMax: 1.08
 --- !u!82 &760298749
@@ -17927,6 +17976,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -25053584768784384, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: field of view
       value: 40
@@ -19295,14 +19348,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rifle
   fireRate: 0.4
-  bulletSpeed: 20
+  bulletSpeed: 200
   damage: 4
   isAutomatic: 1
   pfBulletProjectile: {fileID: 1705255333}
   spawnBulletPosition: {fileID: 1170216350}
   audioSource: {fileID: 1139457418}
-  soundDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
-  sonidoDisparo: {fileID: 8300000, guid: ff4f8e87f56fe594e8c6dbf2cbc40aa4, type: 3}
+  soundDisparo: {fileID: 0}
+  sonidoDisparo: {fileID: 8300000, guid: fb36286f68e3ce14aa5c895a4880a1fb, type: 3}
   pitchMin: 0.92
   pitchMax: 1.08
 --- !u!82 &1139457418
@@ -32140,3 +32193,4 @@ SceneRoots:
   - {fileID: 1552259951}
   - {fileID: 579177776}
   - {fileID: 691139682}
+  - {fileID: 535773158}
